@@ -8,7 +8,7 @@
 
 ## 项目导航
 
-### [01 · 医学问答 Agent（PubMedBERT 微调 + ReAct 工具链）](./01-medical-qa-react-agent)
+### [01 · 医学问答 Agent（PubMedBERT 微调 + ReAct 工具链）](./01-medical-qa-agent)
 
 一条完整的链路：先在 PubMedQA 上微调 PubMedBERT 做三分类，再把这个模型包装成工具，
 交给自己实现的 ReAct Agent 调用。Agent 根据分类器返回的置信度，决定是继续检索还是下结论。
@@ -39,7 +39,7 @@ checkpoint**。
 | 典型修复 | 检索索引漏建 question 字段 → 相关度 0.18 提升至 0.34 |
 | 工程原则 | Prompt 是建议，代码才是保证 |
 
-### [02 · 基于 CBAM 改进 ResNet 的中草药细粒度分类](./03-cbam-resnet-herb)
+### [02 · 基于 CBAM 改进 ResNet 的中草药细粒度分类](./02-cbam-resnet-herb)
 
 手写实现 CBAM 通道与空间注意力模块，嵌入 ResNet 的 BasicBlock 与 Bottleneck，
 支持 ResNet34 / 50 / 101 与 ResNeXt 切换做消融对比。
