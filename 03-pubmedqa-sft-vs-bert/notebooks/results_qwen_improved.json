@@ -1,0 +1,90 @@
+{
+  "model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "run_mode": "improved",
+  "seed": 42,
+  "epochs": 3,
+  "lr": 0.0002,
+  "select_by": "macro_f1",
+  "selected_epoch": 3,
+  "split": {
+    "train": 700,
+    "val": 150,
+    "test": 150
+  },
+  "val_history": [
+    {
+      "epoch": 1,
+      "val_acc": 0.6733333333333333,
+      "val_macro_f1": 0.4647728075754363,
+      "f1_yes": 0.7528089887640449,
+      "f1_no": 0.6415094339622641,
+      "f1_maybe": 0.0
+    },
+    {
+      "epoch": 2,
+      "val_acc": 0.64,
+      "val_macro_f1": 0.4910418499373548,
+      "f1_yes": 0.7189542483660131,
+      "f1_no": 0.6896551724137931,
+      "f1_maybe": 0.06451612903225806
+    },
+    {
+      "epoch": 3,
+      "val_acc": 0.6533333333333333,
+      "val_macro_f1": 0.49973009446693656,
+      "f1_yes": 0.7307692307692307,
+      "f1_no": 0.7017543859649122,
+      "f1_maybe": 0.06666666666666667
+    }
+  ],
+  "comparison": [
+    {
+      "tag": "PubMedBERT baseline (110M, 判别式)",
+      "params": "110M",
+      "accuracy": 0.6533,
+      "macro_f1": 0.4439,
+      "weighted_f1": 0.6119,
+      "per_class_f1": [
+        0.7459,
+        0.5859,
+        0.0
+      ]
+    },
+    {
+      "tag": "PubMedBERT improved (110M, 判别式)",
+      "params": "110M",
+      "accuracy": 0.6533,
+      "macro_f1": 0.4856,
+      "weighted_f1": 0.6252,
+      "per_class_f1": [
+        0.7303,
+        0.6154,
+        0.1111
+      ]
+    },
+    {
+      "accuracy": 0.10666666666666667,
+      "macro_f1": 0.06425702811244981,
+      "weighted_f1": 0.020562248995983936,
+      "per_class_f1": [
+        0.0,
+        0.0,
+        0.1927710843373494
+      ],
+      "tag": "Qwen2.5-0.5B-Instruct 未微调 (生成式)",
+      "params": "0.5B"
+    },
+    {
+      "accuracy": 0.6133333333333333,
+      "macro_f1": 0.45130390442890445,
+      "weighted_f1": 0.6124978146853146,
+      "per_class_f1": [
+        0.7132867132867133,
+        0.640625,
+        0.0
+      ],
+      "tag": "Qwen2.5-0.5B-Instruct + LoRA-SFT [improved] (生成式)",
+      "params": "0.5B"
+    }
+  ]
+}
