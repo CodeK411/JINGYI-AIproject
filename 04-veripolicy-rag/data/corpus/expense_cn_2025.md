@@ -1,0 +1,27 @@
+---
+doc_id: expense_cn_2025
+title: 中国区费用报销规则（2025 版）
+policy_family: expense
+version: "2.0"
+effective_from: 2025-01-01
+effective_to: null
+regions: ["CN"]
+employee_types: ["all"]
+authority: 75
+---
+
+# 中国区费用报销规则（2025 版）
+
+本文件属于 VeriPolicy-RAG 的虚构企业制度基准语料，仅用于工程演示与评测。
+
+## 发票要求
+
+<!-- rule: {"key": "expense.receipt_threshold", "value": "50", "unit": "CNY", "label": "发票门槛", "statement": "自 2025 年起，单笔费用达到 50 元就必须提供发票。", "aliases": ["发票", "小票", "凭证"]} -->
+
+达到门槛的费用必须上传发票原件或电子发票；拆分交易规避门槛视为违规。
+
+## 提交期限
+
+<!-- rule: {"key": "expense.submission_days", "value": "15", "unit": "天", "label": "报销提交期限", "statement": "自 2025 年起，费用须在发生后 15 天内提交报销。", "aliases": ["报销期限", "多久提交", "expense claim"]} -->
+
+员工应及时提交费用，逾期申请需要部门负责人和财务共同批准。
