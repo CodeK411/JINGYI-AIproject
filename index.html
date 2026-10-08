@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="VeriPolicy 企业制度问答演示：按时间、地区及员工类型检索，查看证据与版本变化。">
+  <title>VeriPolicy · 制度证据工作台</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232563eb'/%3E%3Cpath d='M17 22l15 23 15-23' stroke='white' stroke-width='7' fill='none'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./assets/style.css">
+  <script type="module" src="./assets/app.js"></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="./" aria-label="VeriPolicy 首页"><span class="brand-symbol">V<span> /</span></span><span>VeriPolicy<small>制度证据工作台</small></span></a>
+    <div class="nav-caption">WORKSPACE</div>
+    <nav aria-label="工作台导航">
+      <button class="nav-item active" data-view="ask" aria-current="page"><span class="nav-icon">◎</span>制度问答<span class="nav-num">01</span></button>
+      <button class="nav-item" data-view="compare"><span class="nav-icon">⇄</span>版本对比<span class="nav-num">02</span></button>
+      <button class="nav-item" data-view="eval"><span class="nav-icon">▥</span>评测结果<span class="nav-num">03</span></button>
+    </nav>
+    <div class="sidebar-note"><span class="tiny-label">THE PRINCIPLE</span><p>每个回答，<br>都应有适用的依据。</p><span>日期 · 地区 · 人群 · 权威</span></div>
+    <div class="sidebar-bottom"><a href="https://github.com/CodeK411/JINGYI-AIproject/tree/main/04-veripolicy-rag" target="_blank" rel="noopener noreferrer">GitHub 源码</a><span>CPU / LSA · 浏览器演示</span></div>
+  </aside>
+
+  <div class="workspace">
+    <header class="topbar"><span>企业制度 / <strong id="breadcrumb">制度问答</strong></span><span class="runtime" id="runtime">正在连接检索服务…</span></header>
+    <main>
+      <section class="page-heading"><div><div class="eyebrow">POLICY INTELLIGENCE</div><h1 id="page-title">让制度回答，经得起追溯。</h1><p id="page-description">选择适用条件，查找有效制度，并核对每条回答的来源。</p></div><div class="corpus-info"><strong id="doc-count">—</strong><span>份版本化制度</span><span id="chunk-count">正在读取语料</span></div></section>
+      <div class="demo-notice"><span class="notice-tag">交互演示</span>基于 29 份虚构制度实时检索；使用抽取式回答，未接入 LLM 或 Agent。</div>
+
+      <section id="view-ask" class="view">
+        <div class="work-grid">
+          <section class="panel query-panel">
+            <div class="panel-heading"><h2>查询条件</h2><span class="step-tag">INPUT</span></div>
+            <form id="ask-form">
+              <label for="question">你想了解哪条制度？</label>
+              <textarea id="question" minlength="2" maxlength="1000" required rows="4">国内出差饭补多少？</textarea>
+              <label for="as-of">查询基准日期</label><input id="as-of" type="date" value="2025-06-01" required>
+              <div class="field-row"><div><label for="region">地区</label><select id="region"><option value="CN">中国区</option><option value="GB">英国区</option><option value="ALL">仅全球通用</option></select></div><div><label for="employee">员工类型</label><select id="employee"><option value="full_time">正式员工</option><option value="intern">实习生</option><option value="contractor">外包合同工</option><option value="secure_role">涉密岗位</option><option value="all">仅全员制度</option></select></div></div>
+              <label for="pipeline">检索方案</label><select id="pipeline"><option value="full">完整链路 · 过滤 + 重排</option><option value="hybrid_temporal">混合检索 + 适用性过滤</option><option value="hybrid">混合检索 · 无适用性过滤</option><option value="dense">Dense 基线 · 无适用性过滤</option></select>
+              <p class="field-help" id="mode-help">按日期、地区与人群筛选，再根据相关性与权威重排。</p>
+              <button class="primary" type="submit" id="ask-submit">检索并回答</button>
+            </form>
+            <div class="examples"><span class="tiny-label">试一个典型场景</span><button type="button" data-example="travel"><span>01</span>出差饭补 · 查看新旧制度</button><button type="button" data-example="intern"><span>02</span>学习预算 · 实习生专属</button><button type="button" data-example="conflict"><span>03</span>客户礼品 · 同级制度冲突</button><button type="button" data-example="unknown"><span>04</span>股票期权 · 证据不足</button></div>
+          </section>
+          <div class="result-column" id="ask-results" aria-live="polite"><div class="panel empty-state"><div class="empty-mark">V /</div><h2>正在检索有效制度</h2><p>回答、引用证据与检索信号会显示在这里。</p></div></div>
+        </div>
+      </section>
+
+      <section id="view-compare" class="view" hidden>
+        <div class="panel compare-controls"><form id="compare-form"><div class="compare-query"><label for="compare-question">对比同一规则的变化</label><input id="compare-question" value="P1 事件确认时限" minlength="2" maxlength="1000" required></div><div><label for="date-a">较早日期</label><input id="date-a" type="date" value="2024-06-01" required></div><div><label for="date-b">较晚日期</label><input id="date-b" type="date" value="2025-06-01" required></div><div><label for="compare-region">地区</label><select id="compare-region"><option value="CN">中国区</option><option value="GB">英国区</option><option value="ALL">仅全球通用</option></select></div><div><label for="compare-employee">员工类型</label><select id="compare-employee"><option value="full_time">正式员工</option><option value="intern">实习生</option><option value="contractor">外包合同工</option><option value="secure_role">涉密岗位</option><option value="all">仅全员制度</option></select></div><button class="primary" id="compare-submit" type="submit">比较版本</button></form></div>
+        <div id="compare-results" class="compare-results" aria-live="polite"><div class="panel empty-state"><div class="empty-mark">⇄</div><h2>规则如何随时间变化？</h2><p>分别检索两个日期的有效证据，比较与问题相关的规则值。</p></div></div>
+      </section>
+
+      <section id="view-eval" class="view" hidden><div id="eval-results" aria-live="polite"></div></section>
+      <footer>VERIPOLICY <span>证据约束回答 · 适用性过滤 · 冲突感知</span><a href="https://github.com/CodeK411/JINGYI-AIproject/blob/main/04-veripolicy-rag/docs/STUDY_GUIDE.md" target="_blank" rel="noopener noreferrer">实现说明</a></footer>
+    </main>
+  </div>
+</body>
+</html>
