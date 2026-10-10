@@ -1,0 +1,31 @@
+# Generated model output — regenerate with the scripts in src/
+outputs/*
+!outputs/.gitkeep
+
+# Figures regenerated alongside the committed ones
+figures/fig_typology.pdf
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# Tableau working files
+*.twb.bak
+*.tde
+*.hyper
+*.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
